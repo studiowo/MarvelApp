@@ -1,0 +1,6 @@
+module Pods_default_MarvelApp {
+  umbrella header "Pods-default-MarvelApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
