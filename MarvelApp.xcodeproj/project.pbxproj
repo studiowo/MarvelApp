@@ -935,9 +935,15 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A003A3AEA2E88C3C2711F36E /* Pods-MarvelAppTests.debug.xcconfig */;
 			buildSettings = {
+				BASE_URL = "";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FHHC59SSP5;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"TESTABLE=1",
+				);
 				INFOPLIST_FILE = MarvelAppTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -946,6 +952,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = StudioWO.MarvelAppTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG TESTABLE";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MarvelApp.app/MarvelApp";
@@ -956,6 +963,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3F31ED180D44E1705F9C4F58 /* Pods-MarvelAppTests.release.xcconfig */;
 			buildSettings = {
+				BASE_URL = "";
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FHHC59SSP5;

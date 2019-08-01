@@ -30,8 +30,8 @@ class HeroesRouterTest: QuickSpec {
             it("path should to be characters") {
                 expect(sut.path).to(equal("characters"))
             }
-            it("parameters should to nil") {
-                expect(sut.parameters).to(beNil())
+            it("parameters should not to be nil") {
+                expect(sut.parameters).notTo(beNil())
             }
             it("headers should not to be nil") {
                 expect(sut.headers).notTo(beNil())

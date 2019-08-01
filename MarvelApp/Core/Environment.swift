@@ -14,7 +14,8 @@ struct Environment {
             return ""
         }
         
-        return url
+        guard let rawValue = getenv("BASE_URL_TEST"), let urlTest = String(utf8String: rawValue) else { return url }
+        return urlTest
     }
     
     static var publicKey: String {

@@ -21,7 +21,7 @@ class EnvironmentTest: QuickSpec {
                 expect(sut.baseUrl).notTo(beEmpty())
             }
             it("baseUrl should to have a valid value") {
-                expect(sut.baseUrl).to(equal("https://gateway.marvel.com/"))
+                expect(sut.baseUrl).to(equal("http://127.0.0.1:8080"))
             }
             
             it("publicKey should not be nil or empty") {
