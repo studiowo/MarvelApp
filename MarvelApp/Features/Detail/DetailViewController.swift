@@ -14,7 +14,7 @@ final class DetailViewController: UIViewController, BaseViewController, ViewConf
         let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         collection.prepare()
         
-        collection.backgroundColor = .gray
+        collection.backgroundColor = .black
         
         return collection
     }()

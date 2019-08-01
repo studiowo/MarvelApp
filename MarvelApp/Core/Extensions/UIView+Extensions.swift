@@ -8,6 +8,19 @@
 
 import UIKit
 
+import UIKit
+
+//MARK: Effects
+extension UIView {
+    public func addBlur(visualEffectView: UIVisualEffectView = UIVisualEffectView()) {
+        let blurEffectView = visualEffectView
+        blurEffectView.frame = self.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.addSubview(blurEffectView)
+    }
+}
+
+
 //MARK: ViewCode Protocol
 protocol ViewConfiguration: AnyObject {
     func setupViews()

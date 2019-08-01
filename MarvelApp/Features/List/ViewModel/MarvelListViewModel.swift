@@ -51,7 +51,8 @@ class MarvelListViewModel {
         }
         
         let viewModelItems = list.map {
-            HeroeListViewViewModel((name: $0.name ?? "", image: "\(String(describing: $0.thumbnail?.path ?? "")).\(String(describing: $0.thumbnail?.extension ?? ""))"))
+            HeroeListViewViewModel((name: $0.name ?? "",
+                                    image: "\(String(describing: $0.thumbnail?.path ?? "")).\(String(describing: $0.thumbnail?.extension ?? ""))"))
         }
         sections[0].items.append(contentsOf: viewModelItems)
         updateSections?(sections, offset, limit, total)

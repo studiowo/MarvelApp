@@ -16,7 +16,10 @@ extension ViewConfiguration where Self: DetailViewController {
         source = CollectionViewSource(sections: [], callback: nil)
         viewModel.updateSections = { [weak self] sections in
             guard let self = self else { return }
+            
             self.source?.updateSections(sections)
+            self.source?.register(itemsFor: self.collectionView)
+            
             self.collectionView.reloadData()
         }
     }

@@ -14,6 +14,8 @@
 		7C36EF6D22F39080002ED2B8 /* HeroeDetailViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36EF6C22F39080002ED2B8 /* HeroeDetailViewViewModel.swift */; };
 		7C36EF6F22F3917D002ED2B8 /* HeroeHeaderSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36EF6E22F3917D002ED2B8 /* HeroeHeaderSectionCell.swift */; };
 		7C36EF7222F3922A002ED2B8 /* HeroeHeaderViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36EF7122F3922A002ED2B8 /* HeroeHeaderViewViewModel.swift */; };
+		7C36EF7422F39637002ED2B8 /* VisualEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36EF7322F39637002ED2B8 /* VisualEffects.swift */; };
+		7C36EF7622F39660002ED2B8 /* CustomVisualEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36EF7522F39660002ED2B8 /* CustomVisualEffects.swift */; };
 		7C6F2B4822EA5D0100FEAB80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6F2B4722EA5D0100FEAB80 /* AppDelegate.swift */; };
 		7C6F2B4F22EA5D0200FEAB80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C6F2B4E22EA5D0200FEAB80 /* Assets.xcassets */; };
 		7C6F2B5222EA5D0200FEAB80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7C6F2B5022EA5D0200FEAB80 /* LaunchScreen.storyboard */; };
@@ -82,6 +84,8 @@
 		7C36EF6C22F39080002ED2B8 /* HeroeDetailViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroeDetailViewViewModel.swift; sourceTree = "<group>"; };
 		7C36EF6E22F3917D002ED2B8 /* HeroeHeaderSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroeHeaderSectionCell.swift; sourceTree = "<group>"; };
 		7C36EF7122F3922A002ED2B8 /* HeroeHeaderViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroeHeaderViewViewModel.swift; sourceTree = "<group>"; };
+		7C36EF7322F39637002ED2B8 /* VisualEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffects.swift; sourceTree = "<group>"; };
+		7C36EF7522F39660002ED2B8 /* CustomVisualEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVisualEffects.swift; sourceTree = "<group>"; };
 		7C6F2B4422EA5D0100FEAB80 /* MarvelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C6F2B4722EA5D0100FEAB80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7C6F2B4E22EA5D0200FEAB80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -221,6 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				7C6F2B7822EF7CAC00FEAB80 /* AssociatedObjectOperator.swift */,
+				7C36EF7322F39637002ED2B8 /* VisualEffects.swift */,
+				7C36EF7522F39660002ED2B8 /* CustomVisualEffects.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -723,12 +729,14 @@
 				7C6F2B9222EF96E600FEAB80 /* CollectionViewCell.swift in Sources */,
 				7C6F2BA422EFB09F00FEAB80 /* Environment.swift in Sources */,
 				7C36EF6B22F39037002ED2B8 /* HeroeDetailHeaderCell.swift in Sources */,
+				7C36EF7622F39660002ED2B8 /* CustomVisualEffects.swift in Sources */,
 				7C6F2B9422EF97F400FEAB80 /* Reusable.swift in Sources */,
 				7C6F2B4822EA5D0100FEAB80 /* AppDelegate.swift in Sources */,
 				7C6F2B7922EF7CAC00FEAB80 /* AssociatedObjectOperator.swift in Sources */,
 				7C6F2B7C22EF7F8A00FEAB80 /* UIView+Extensions.swift in Sources */,
 				7C36EF6D22F39080002ED2B8 /* HeroeDetailViewViewModel.swift in Sources */,
 				7C8A598222F24693004C6478 /* HeroeViewControllerFactory.swift in Sources */,
+				7C36EF7422F39637002ED2B8 /* VisualEffects.swift in Sources */,
 				7CA582C022F0D4E4003664BA /* HeroeCollectionViewCell.swift in Sources */,
 				7C6F2BAD22F097E100FEAB80 /* Heroe.swift in Sources */,
 				7C6F2BAF22F09ABC00FEAB80 /* HeroeList.swift in Sources */,

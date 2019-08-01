@@ -19,6 +19,15 @@ class HeroeDetailViewModel {
         return model.name ?? ""
     }
     
+    var thumb: String {
+        guard let thumb = model.thumbnail, let path = thumb.path, let ext = thumb.extension else {
+            return ""
+        }
+        return "\(path).\(ext)"
+    }
+    
+    private var sections: [CollectionViewSection] = []
+    
     init(with model: Heroe) {
         self.model = model
     }
@@ -32,6 +41,9 @@ class HeroeDetailViewModel {
     
     //MARK: Config
     private func configSections() {
+        let header = HeroeDetailViewViewModel((name: name, image: thumb))
         
+        sections.append(CollectionViewSection(items: [header]))
+        updateSections?(sections)
     }
 }

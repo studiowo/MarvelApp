@@ -9,11 +9,14 @@
 import UIKit
 
 final class HeroeDetailHeaderCell: CollectionViewCell {
-    lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .white)
-        indicator.prepare()
-        indicator.startAnimating()
-        return indicator
+    
+    lazy var imageCover: UIImageView = {
+        let imageView = UIImageView()
+        imageView.prepare()
+        imageView.addBlur(visualEffectView: VisualEffect.effect(style: .custom(.light, intensity: 0.3)))
+        imageView.image = UIImage(named: "placeholder")
+        imageView.contentMode = .scaleAspectFill
+        return imageView
     }()
     
     lazy var imageHeroe: UIImageView = {
@@ -27,54 +30,43 @@ final class HeroeDetailHeaderCell: CollectionViewCell {
     lazy var labelHeroe: UILabel = {
         let label = UILabel()
         label.prepare()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 26, weight: .bold)
+        label.textAlignment = .center
         label.textColor = .white
         return label
-    }()
-    
-    lazy var viewBackgroundTitle: UIView = {
-        let view = UIView()
-        view.prepare()
-        view.backgroundColor = .black
-        view.alpha = 0.9
-        return view
     }()
     
     override func prepareForReuse() {
         super.prepareForReuse()
         
         imageHeroe.image = nil
-        activityIndicator.startAnimating()
     }
     
     override func setupViewHierarchy() {
         super.setupViewHierarchy()
-        [activityIndicator, imageHeroe, viewBackgroundTitle].forEach(contentView.addSubview)
-        viewBackgroundTitle.addSubview(labelHeroe)
+        [imageCover, imageHeroe, labelHeroe].forEach(contentView.addSubview)
     }
     
     override func setupConstraints() {
         super.setupConstraints()
         
-        activityIndicator
-            .centerXAnchor(equalTo: contentView.centerXAnchor)
-            .centerYAnchor(equalTo: contentView.centerYAnchor, constant: -32)
-        
         imageHeroe
+            .widthAnchor(equalTo: 150)
+            .heightAnchor(equalTo: 150)
+            .centerXAnchor(equalTo: contentView.centerXAnchor)
+            .centerYAnchor(equalTo: contentView.centerYAnchor, constant: -48)
+        
+        labelHeroe
+            .topAnchor(equalTo: imageHeroe.bottomAnchor, constant: 24, priority: .defaultLow)
+            .widthAnchor(equalTo: UIScreen.main.bounds.size.width - 32)
+            .centerXAnchor(equalTo: contentView.centerXAnchor)
+        
+        imageCover
             .topAnchor(equalTo: contentView.topAnchor)
             .bottomAnchor(equalTo: contentView.bottomAnchor, constant: -32, priority: .defaultLow)
             .widthAnchor(equalTo: UIScreen.main.bounds.size.width)
             .heightAnchor(equalTo: UIScreen.main.bounds.size.width)
             .centerXAnchor(equalTo: contentView.centerXAnchor)
-        
-        viewBackgroundTitle
-            .bottomAnchor(equalTo: contentView.bottomAnchor)
-            .leadingAnchor(equalTo: contentView.leadingAnchor)
-            .trailingAnchor(equalTo: contentView.trailingAnchor)
-        
-        labelHeroe
-            .topAnchor(equalTo: viewBackgroundTitle.topAnchor, constant: 16, priority: .defaultLow)
-            .bottomAnchor(equalTo: viewBackgroundTitle.bottomAnchor, constant: -16)
-            .leadingAnchor(equalTo: viewBackgroundTitle.leadingAnchor, constant: 16)
     }
 }
