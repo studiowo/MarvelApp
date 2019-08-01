@@ -42,7 +42,9 @@ final class AppCoordinator: Coordinator, ViewModelAccess {
     }
     
     private func registerEvents() {
-        self.register(eventType: MainEvent.self) { event in
+        self.register(eventType: MainEvent.self) { [weak self] event in
+            guard let self = self else { return }
+            
             switch event {
             case .detail(let viewModel, let position):
                 guard let model = viewModel.getModel(self),

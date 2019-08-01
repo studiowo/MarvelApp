@@ -10,6 +10,24 @@ import UIKit
 
 final class DetailViewController: UIViewController, BaseViewController, ViewConfiguration {
     
+    lazy var collectionView: UICollectionView = {
+        let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        collection.prepare()
+        
+        collection.backgroundColor = .gray
+        
+        return collection
+    }()
+    
+    var source: CollectionViewSource? {
+        didSet {
+            source?.register(itemsFor: collectionView)
+            
+            collectionView.dataSource = source
+            collectionView.delegate = source
+        }
+    }
+    
     let viewModel: HeroeDetailViewModel
     
     //MARK: Init

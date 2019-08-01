@@ -15,8 +15,8 @@ extension UIImageView {
     func downloadImage(from imgURL: String!) {
         UIView.animate(withDuration: 0.2, animations: {
             self.alpha = 0
-        }) { _ in
-            guard let imgURL = URL(string: imgURL) else {
+        }) { [weak self] _ in
+            guard let self = self, let imgURL = URL(string: imgURL) else {
                 return
             }
             
@@ -38,13 +38,15 @@ extension UIImageView {
                 }
                 
                 DispatchQueue.main.async {
-                    guard let data = data else {
+                    guard let data = data, let imageToCache = UIImage(data: data) else {
+                        self.image = UIImage(named: "placeholder")
+                        UIView.animate(withDuration: 0.2, animations: {
+                            self.alpha = 1
+                        })
                         return
                     }
                     
-                    let imageToCache = UIImage(data: data)
-                    
-                    imageCache.setObject(imageToCache!, forKey: imgURL.absoluteString as NSString)
+                    imageCache.setObject(imageToCache, forKey: imgURL.absoluteString as NSString)
                     self.image = imageToCache
                     UIView.animate(withDuration: 0.2, animations: {
                         self.alpha = 1

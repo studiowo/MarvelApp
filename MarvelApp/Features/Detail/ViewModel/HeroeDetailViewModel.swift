@@ -12,10 +12,26 @@ class HeroeDetailViewModel {
     private let model: Heroe
     
     var title: String {
+        return name
+    }
+    
+    var name: String {
         return model.name ?? ""
     }
     
     init(with model: Heroe) {
         self.model = model
+    }
+    
+    //MARK: Bindings
+    var updateSections: ((_ sections: [CollectionViewSection]) -> Void)? {
+        didSet {
+            configSections()
+        }
+    }
+    
+    //MARK: Config
+    private func configSections() {
+        
     }
 }

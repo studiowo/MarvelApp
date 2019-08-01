@@ -13,7 +13,9 @@ extension ViewConfiguration where Self: MainViewController {
         source = CollectionViewSource(sections: [], callback: nil)
         source?.context = self
         
-        viewModel.updateSections = { sections, offset, limit, total in
+        viewModel.updateSections = { [weak self] sections, offset, limit, total in
+            guard let self = self else { return }
+            
             self.hideLoading()
             self.source?.updateSections(sections)
             self.source?.register(itemsFor: self.collectionView)

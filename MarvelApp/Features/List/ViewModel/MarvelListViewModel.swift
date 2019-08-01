@@ -50,7 +50,9 @@ class MarvelListViewModel {
             return
         }
         
-        let viewModelItems = list.map { HeroeListViewModel($0) }
+        let viewModelItems = list.map {
+            HeroeListViewViewModel((name: $0.name ?? "", image: "\(String(describing: $0.thumbnail?.path ?? "")).\(String(describing: $0.thumbnail?.extension ?? ""))"))
+        }
         sections[0].items.append(contentsOf: viewModelItems)
         updateSections?(sections, offset, limit, total)
     }
@@ -59,7 +61,9 @@ class MarvelListViewModel {
     func fetchHeroes() {
         self.isLoading = true
         
-        HeroeData.request(with: HeroesRouter.list, onSuccess: { (result) in
+        HeroeData.request(with: HeroesRouter.list, onSuccess: { [weak self] result in
+            guard let self = self else { return }
+            
             if case let .asSelf(model) = result, let data = model.data {
                 self.model = data
                 self.isLoading = false
@@ -78,7 +82,9 @@ class MarvelListViewModel {
             let offset = model.offset,
             let limit = model.limit else { return }
         
-        HeroeData.request(with: HeroesRouter.loadMore(offset: offset + limit), onSuccess: { (result) in
+        HeroeData.request(with: HeroesRouter.loadMore(offset: offset + limit), onSuccess: { [weak self] result in
+            guard let self = self else { return }
+            
             if case let .asSelf(model) = result, let data = model.data {
                 self.model?.addResults(data.results ?? [])
                 self.isLoading = false

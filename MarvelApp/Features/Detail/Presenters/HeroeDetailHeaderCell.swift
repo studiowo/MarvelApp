@@ -1,15 +1,14 @@
 //
-//  HeroeCollectionViewCell.swift
+//  HeroeDetailHeaderCell.swift
 //  MarvelApp
 //
-//  Created by Renato Matos de Paula on 30/07/19.
+//  Created by Renato Matos de Paula on 01/08/19.
 //  Copyright © 2019 Renato Matos de Paula. All rights reserved.
 //
 
 import UIKit
 
-final class HeroeCollectionViewCell: CollectionViewCell {
-    
+final class HeroeDetailHeaderCell: CollectionViewCell {
     lazy var activityIndicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: .white)
         indicator.prepare()
@@ -47,7 +46,7 @@ final class HeroeCollectionViewCell: CollectionViewCell {
         imageHeroe.image = nil
         activityIndicator.startAnimating()
     }
- 
+    
     override func setupViewHierarchy() {
         super.setupViewHierarchy()
         [activityIndicator, imageHeroe, viewBackgroundTitle].forEach(contentView.addSubview)
@@ -72,7 +71,7 @@ final class HeroeCollectionViewCell: CollectionViewCell {
             .bottomAnchor(equalTo: contentView.bottomAnchor)
             .leadingAnchor(equalTo: contentView.leadingAnchor)
             .trailingAnchor(equalTo: contentView.trailingAnchor)
-
+        
         labelHeroe
             .topAnchor(equalTo: viewBackgroundTitle.topAnchor, constant: 16, priority: .defaultLow)
             .bottomAnchor(equalTo: viewBackgroundTitle.bottomAnchor, constant: -16)
