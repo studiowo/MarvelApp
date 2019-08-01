@@ -13,13 +13,27 @@ extension ViewConfiguration where Self: MainViewController {
         source = CollectionViewSource(sections: [], callback: nil)
         source?.context = self
         
-        viewModel.updateSections = { sections in
+        viewModel.updateSections = { sections, offset, limit, total in
+            self.hideLoading()
             self.source?.updateSections(sections)
             self.source?.register(itemsFor: self.collectionView)
-            self.collectionView.reloadData()
+            
+            if offset == 0 {
+                self.collectionView.reloadData()
+            } else {
+                var indexPaths: [IndexPath] = []
+                for index in offset...offset + limit-1 where index < total {
+                    let indexPath: IndexPath = IndexPath(item: index, section: 0)
+                    indexPaths.append(indexPath)
+                }
+                
+                DispatchQueue.main.async { [unowned self] in
+                    self.collectionView.performBatchUpdates({
+                        self.collectionView.insertItems(at: indexPaths)
+                    })
+                }
+            }
         }
-        
-        hideLoading()
         
         self.view.backgroundColor = .white
     }

@@ -48,7 +48,21 @@ enum Router: URLRequestConvertible {
     fileprivate var parameters: [String: Any]? {
         switch self {
         case .request(let data):
-            return data.parameters
+            var params: [String: Any] = data.parameters ?? [:]
+            if let env = SDKClient.shared.environment {
+                switch env.authType {
+                case .hmac(let environment):
+                    let ts = "\(Date().currentTimeMillis())"
+                    params["ts"] = ts
+                    params["apikey"] = environment.apiKey
+                    params["hash"] = ApiFactory.getHash(ts: ts, hash: environment.hash)
+                    break
+                default:
+                    break
+                }
+            }
+            
+            return params
         }
     }
 
@@ -58,15 +72,13 @@ enum Router: URLRequestConvertible {
         switch self {
         case .request(let data):
             defaultHeaders = data.headers ?? [:]
+            defaultHeaders["Accept-Encoding"] = "application/gzip"
             return defaultHeaders
         }
     }
 
     fileprivate var baseUrl: String {
-        let base = SDKClient.shared.environment?.urlEnvironment.baseURL ?? ""
-        let version = SDKClient.shared.environment?.urlEnvironment.version ?? ""
-
-        return "\(base)\(version)/"
+        return SDKClient.shared.baseUrl
     }
 
     var parameterEncoding: ParameterEncoding {

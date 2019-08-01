@@ -29,18 +29,4 @@ final class DetailViewController: UIViewController, BaseViewController, ViewConf
         super.viewDidLoad()
         self.setupViews()
     }
-    
-    //MARK: View Configuration
-    func configureViews() {
-        view.backgroundColor = .black
-        view.accessibilityIdentifier = "DETAIL_SCREEN_VIEW"
-    }
-    
-    func setupViewHierarchy() {
-        
-    }
-    
-    func setupConstraints() {
-        
-    }
 }

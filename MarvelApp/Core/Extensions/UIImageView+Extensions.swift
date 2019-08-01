@@ -13,35 +13,45 @@ let imageCache = NSCache<NSString, UIImage>()
 extension UIImageView {
     
     func downloadImage(from imgURL: String!) {
-        guard let imgURL = URL(string: imgURL) else {
-            return
-        }
-        
-        let url = URLRequest(url: imgURL)
-        image = nil
-        
-        if let imageToCache = imageCache.object(forKey: imgURL.absoluteString as NSString) {
-            self.image = imageToCache
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print(error)
+        UIView.animate(withDuration: 0.2, animations: {
+            self.alpha = 0
+        }) { _ in
+            guard let imgURL = URL(string: imgURL) else {
                 return
             }
             
-            DispatchQueue.main.async {
-                guard let data = data else {
+            let url = URLRequest(url: imgURL)
+            self.image = nil
+            
+            if let imageToCache = imageCache.object(forKey: imgURL.absoluteString as NSString) {
+                self.image = imageToCache
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.alpha = 1
+                })
+                return
+            }
+            
+            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if let error = error {
+                    print(error)
                     return
                 }
                 
-                let imageToCache = UIImage(data: data)
-                
-                imageCache.setObject(imageToCache!, forKey: imgURL.absoluteString as NSString)
-                self.image = imageToCache
+                DispatchQueue.main.async {
+                    guard let data = data else {
+                        return
+                    }
+                    
+                    let imageToCache = UIImage(data: data)
+                    
+                    imageCache.setObject(imageToCache!, forKey: imgURL.absoluteString as NSString)
+                    self.image = imageToCache
+                    UIView.animate(withDuration: 0.2, animations: {
+                        self.alpha = 1
+                    })
+                }
             }
+            task.resume()
         }
-        task.resume()
     }
 }

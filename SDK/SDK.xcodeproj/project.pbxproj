@@ -40,6 +40,8 @@
 		11EA5E6321597A2B00BF9840 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11EA5E6221597A2B00BF9840 /* RequestProtocol.swift */; };
 		11F41A76216401150073F89F /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F41A75216401150073F89F /* BaseRouter.swift */; };
 		7AB20888A4E4BDD27D526BD2 /* Pods_BVSDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A361A9099F5EE1C7076FB042 /* Pods_BVSDKTests.framework */; };
+		7C36EF6422F3413D002ED2B8 /* ApiFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36EF6322F3413D002ED2B8 /* ApiFactory.swift */; };
+		7C36EF6722F3422D002ED2B8 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C36EF6622F3422D002ED2B8 /* Date+Extensions.swift */; };
 		92465518E4ABC390CC844A99 /* Pods_SDKTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4137CBF8965851E2D7738C80 /* Pods_SDKTests.framework */; };
 		CE4A28A8F023950DCF3463F8 /* Pods_default_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 11717B7180D41C079049FA97 /* Pods_default_SDK.framework */; };
 /* End PBXBuildFile section */
@@ -92,6 +94,8 @@
 		5649731F08C02F53B1610D67 /* Pods-BVSDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BVSDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BVSDKTests/Pods-BVSDKTests.debug.xcconfig"; sourceTree = "<group>"; };
 		57B304E6A8475355DB869D04 /* Pods-default-BVSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-default-BVSDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-default-BVSDK/Pods-default-BVSDK.release.xcconfig"; sourceTree = "<group>"; };
 		6283158DDA5EEDF9DFB0A40B /* Pods-default-SDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-default-SDK.release.xcconfig"; path = "Pods/Target Support Files/Pods-default-SDK/Pods-default-SDK.release.xcconfig"; sourceTree = "<group>"; };
+		7C36EF6322F3413D002ED2B8 /* ApiFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiFactory.swift; sourceTree = "<group>"; };
+		7C36EF6622F3422D002ED2B8 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		A361A9099F5EE1C7076FB042 /* Pods_BVSDKTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BVSDKTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C46F192AE2C5060BFD70EC36 /* Pods-BVSDKTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BVSDKTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BVSDKTests/Pods-BVSDKTests.release.xcconfig"; sourceTree = "<group>"; };
 		C52F6A1FCE599C623AC764D0 /* Pods-SDKTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDKTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SDKTests/Pods-SDKTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -173,6 +177,7 @@
 		11BE658221133BFF00B47D2D /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				7C36EF6522F34223002ED2B8 /* Extensions */,
 				11AEEEF721593EDC00E50E70 /* Features */,
 				11BE659A21133C3900B47D2D /* API */,
 				11BE659B21133C4100B47D2D /* Common */,
@@ -201,6 +206,7 @@
 				11BE659C21133D0600B47D2D /* ApiClient.swift */,
 				11BE659E21133D1000B47D2D /* Api.swift */,
 				11AEEF80215967FB00E50E70 /* APIRequestManager.swift */,
+				7C36EF6322F3413D002ED2B8 /* ApiFactory.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -230,6 +236,14 @@
 				11717B7180D41C079049FA97 /* Pods_default_SDK.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7C36EF6522F34223002ED2B8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7C36EF6622F3422D002ED2B8 /* Date+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		A47097426C6C704A9F71C3C5 /* Pods */ = {
@@ -444,12 +458,14 @@
 				11EA5E61215975F900BF9840 /* SDKEnvironment.swift in Sources */,
 				11F41A76216401150073F89F /* BaseRouter.swift in Sources */,
 				11BE65A121133D1800B47D2D /* BaseModel.swift in Sources */,
+				7C36EF6422F3413D002ED2B8 /* ApiFactory.swift in Sources */,
 				11DB3575215C17C300EFCE40 /* BaseResult.swift in Sources */,
 				11AEEF81215967FB00E50E70 /* APIRequestManager.swift in Sources */,
 				11AEEF7C2159675E00E50E70 /* ErrorResult.swift in Sources */,
 				1165F1F82162AFD70099601F /* Platform.swift in Sources */,
 				11BE659F21133D1000B47D2D /* Api.swift in Sources */,
 				11AEEF7F215967B600E50E70 /* RequestErrorHandlerProtocol.swift in Sources */,
+				7C36EF6722F3422D002ED2B8 /* Date+Extensions.swift in Sources */,
 				11AEEEF921593F3400E50E70 /* Toggable.swift in Sources */,
 				11E9EF5F215D51EB00ED09BE /* SSLCertificate.swift in Sources */,
 				11BE659D21133D0600B47D2D /* ApiClient.swift in Sources */,

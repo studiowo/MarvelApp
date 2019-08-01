@@ -62,4 +62,11 @@ extension CollectionViewSource: UICollectionViewDelegate {
         itemAt(indexPath.section)?.callback?(data.value, indexPath)
         context.didSelectItemAt(index: indexPath)
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if (scrollView.bounds.maxY) == scrollView.contentSize.height{
+            context?.willShowLastItem()
+        }
+    }
 }

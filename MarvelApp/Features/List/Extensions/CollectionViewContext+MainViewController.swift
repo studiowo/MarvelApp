@@ -12,4 +12,9 @@ extension CollectionViewContext where Self: MainViewController {
     func didSelectItemAt(index: IndexPath) {
         self.handleEvents(event: MainEvent.detail(viewModel: self.viewModel, position: index.row))
     }
+    
+    func willShowLastItem() {
+        self.showLoading()
+        self.viewModel.loadMoreHeroes()
+    }
 }

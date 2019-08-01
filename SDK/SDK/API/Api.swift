@@ -24,7 +24,22 @@ class Api {
 
         self.didFinishConfig = didFinishConfig
         self.didFinishError = didFinishError
-
+        
+        switch environment.authType {
+        case .grant(let environment):
+            self.setupGrantConfiguration(environment)
+            break
+        case .hmac(let environment):
+            self.setupHMACConfiguration(environment)
+            break
+        }
+    }
+    
+    private func setupGrantConfiguration(_ environment: GrantEnvironment) {
+        let base = environment.baseURL
+        let version = environment.version
+        let baseUrl = "\(base)\(version)/"
+        
         let configuration = URLSessionConfiguration.default
         configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
         configuration.httpCookieAcceptPolicy = .always
@@ -33,25 +48,49 @@ class Api {
         configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         configuration.urlCache = nil
         configuration.tlsMinimumSupportedProtocol = .tlsProtocol12
-
-        let base = SDKClient.shared.environment?.urlEnvironment.baseURL ?? ""
-        let version = SDKClient.shared.environment?.urlEnvironment.version ?? ""
-        let baseUrl = "\(base)\(version)/"
-
+        
         let serverTurstPolicies: [String: ServerTrustPolicy] = [
             baseUrl: .pinCertificates(
-                certificates: environment.urlEnvironment.sslCertificates.compactMap { $0.certificate() },
+                certificates: environment.sslCertificates.compactMap { $0.certificate() },
                 validateCertificateChain: true,
                 validateHost: true
             )
         ]
-
+        
         let serverTrustPolicyManager = ServerTrustPolicyManager(policies: serverTurstPolicies)
-
-        self.client.setupClient(configuration: configuration, baseURL: baseUrl, timeout: 5, errorHandler: self, apiConfig: serverTrustPolicyManager)
+        
+        self.client.setupClient(configuration: configuration, baseURL: baseUrl, timeout: 60, errorHandler: self, apiConfig: serverTrustPolicyManager)
+        self.didFinishConfig?()
+    }
+    
+    private func setupHMACConfiguration(_ environment: HMACEnvironment) {
+        let base = environment.baseURL
+        let baseUrl = "\(base)"
+        
+        let configuration = URLSessionConfiguration.default
+        configuration.httpAdditionalHeaders = Alamofire.SessionManager.defaultHTTPHeaders
+        configuration.httpCookieAcceptPolicy = .always
+        configuration.timeoutIntervalForRequest = 20
+        configuration.timeoutIntervalForResource = 20
+        configuration.requestCachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        configuration.urlCache = nil
+        configuration.tlsMinimumSupportedProtocol = .tlsProtocol12
+        
+        let serverTurstPolicies: [String: ServerTrustPolicy] = [
+            baseUrl: .pinCertificates(
+                certificates: environment.sslCertificates.compactMap { $0.certificate() },
+                validateCertificateChain: true,
+                validateHost: true
+            )
+        ]
+        
+        let serverTrustPolicyManager = ServerTrustPolicyManager(policies: serverTurstPolicies)
+        
+        self.client.setupClient(configuration: configuration, baseURL: baseUrl, timeout: 60, errorHandler: self, apiConfig: serverTrustPolicyManager)
         self.didFinishConfig?()
     }
 }
+
 
 extension Api: RequestErrorHandlerProtocol {
     func handleErrorResult(_ errorResult: ErrorResult) {

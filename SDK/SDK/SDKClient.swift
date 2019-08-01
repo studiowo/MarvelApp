@@ -27,8 +27,19 @@ public class SDKClient {
     var environment: SDKEnvironment?
     
     var baseUrl: String {
-        let base = SDKClient.shared.environment?.urlEnvironment.baseURL ?? ""
-        let version = SDKClient.shared.environment?.urlEnvironment.version ?? ""
+        guard let env = SDKClient.shared.environment else { return "" }
+        
+        var base = ""
+        var version = ""
+        
+        switch env.authType {
+        case .grant(let environment):
+            base = environment.baseURL
+            version = environment.version
+        case .hmac(let environment):
+            base = environment.baseURL
+        }
+        
         return "\(base)\(version)/"
     }
 
@@ -49,7 +60,7 @@ public class SDKClient {
         if accessIsValid {
             debugPrint("Configuration SDK has been started... ⚙️")
 
-            Api.shared.setupClient(with: "\(environment.urlEnvironment.baseURL)/\(environment.urlEnvironment.version)", didFinishConfig: self.didFinishConfig ?? {
+            Api.shared.setupClient(with: baseUrl, didFinishConfig: self.didFinishConfig ?? {
                 debugPrint("Configuration SDK has been finished successfully... ✅")
                 }, didFinishError: self.didFinishError)
             return

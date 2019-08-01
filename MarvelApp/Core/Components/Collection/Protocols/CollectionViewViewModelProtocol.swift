@@ -13,6 +13,7 @@ protocol CollectionViewContext: AnyObject {
     func reloadSection(at indexSet: IndexSet, completion: (() -> Void)?)
     func reloadAllCollection()
     func didSelectItemAt(index: IndexPath)
+    func willShowLastItem()
 }
 
 extension CollectionViewContext {

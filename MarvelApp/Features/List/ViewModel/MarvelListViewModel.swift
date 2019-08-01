@@ -13,6 +13,8 @@ protocol ViewModelAccess {}
 class MarvelListViewModel {
     weak var view: ViewConfiguration?
     
+    private var isLoading = false
+    
     var title: String {
         return "Marvel Heroes"
     }
@@ -32,33 +34,58 @@ class MarvelListViewModel {
         return self.model
     }
     
-    private var sections: [CollectionViewSection] = [] {
-        didSet {
-            updateSections?(sections)
-        }
-    }
+    private var sections: [CollectionViewSection] = [CollectionViewSection(items: [])]
     
-    var updateSections: ((_ sections: [CollectionViewSection]) -> Void)?
+    //MARK: Bindings
+    var updateSections: ((_ sections: [CollectionViewSection], _ offset: Int, _ limit: Int, _ totalItens: Int) -> Void)?
     
-    func fetchHeroes() {
-        let list = JSONHelper.getObjectFrom(json: "heroesList", type: HeroeList.self)
-        self.model = list
-//        HeroeList.request(with: HeroesRouter.list, onSuccess: { (result) in
-//            if case let .asSelf(model) = result {
-//                self.model = model
-//            }
-//        }, onError: { (error) in
-//
-//        })
-    }
-    
+    //MARK: Config
     private func configSections() {
-        guard let model = self.model, let list = model.results else {
+        guard let model = self.model,
+            let total = model.total,
+            let limit = model.limit,
+            let offset = model.offset,
+            let list = model.results?.dropFirst(offset) else {
             sections = []
             return
         }
         
         let viewModelItems = list.map { HeroeListViewModel($0) }
-        sections = [CollectionViewSection(items: viewModelItems)]
+        sections[0].items.append(contentsOf: viewModelItems)
+        updateSections?(sections, offset, limit, total)
+    }
+    
+    //MARK: API
+    func fetchHeroes() {
+        self.isLoading = true
+        
+        HeroeData.request(with: HeroesRouter.list, onSuccess: { (result) in
+            if case let .asSelf(model) = result, let data = model.data {
+                self.model = data
+                self.isLoading = false
+            }
+        }, onError: { (error) in
+            print(error)
+            self.isLoading = false
+        })
+    }
+    
+    func loadMoreHeroes() {
+        guard !isLoading else { return }
+        self.isLoading = true
+        
+        guard let model = self.model,
+            let offset = model.offset,
+            let limit = model.limit else { return }
+        
+        HeroeData.request(with: HeroesRouter.loadMore(offset: offset + limit), onSuccess: { (result) in
+            if case let .asSelf(model) = result, let data = model.data {
+                self.model?.addResults(data.results ?? [])
+                self.isLoading = false
+            }
+        }, onError: { (error) in
+            print(error)
+            self.isLoading = false
+        })
     }
 }

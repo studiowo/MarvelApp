@@ -47,13 +47,9 @@ final class MainViewController: UIViewController, BaseViewController, ViewConfig
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.showLoading()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
         self.setupViews()
+        
+        self.showLoading()
         self.viewModel.fetchHeroes()
     }
 }

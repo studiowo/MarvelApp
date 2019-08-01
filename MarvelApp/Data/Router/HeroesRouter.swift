@@ -12,6 +12,7 @@ import SDK
 
 enum HeroesRouter: RouterProtocol {
     case list
+    case loadMore(offset: Int)
     
     var needsAuth: Bool {
         return true
@@ -28,7 +29,12 @@ enum HeroesRouter: RouterProtocol {
     var parameters: [String: Any]? {
         switch self {
         case .list:
-            return nil
+            return ["orderBy": "-modified"]
+        case .loadMore(let offset):
+            var params: [String: Any] = ["orderBy": "-modified"]
+            params["offset"] = offset
+            
+            return params
         }
     }
     

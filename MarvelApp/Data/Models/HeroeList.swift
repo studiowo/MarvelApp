@@ -9,10 +9,16 @@
 import Foundation
 import SDK
 
-struct HeroeList: Codable, Fetchable {
-    let offset: Int?
+struct HeroeList: Codable {
+    var offset: Int?
     let limit: Int?
     let total: Int?
     let count: Int?
-    let results: [Heroe]?
+    var results: [Heroe]?
+    
+    mutating func addResults(_ heroes: [Heroe]) {
+        guard let offset = self.offset else { return }
+        self.offset = offset + heroes.count
+        self.results?.append(contentsOf: heroes)
+    }
 }
