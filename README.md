@@ -1,4 +1,4 @@
-# Marve App
+# Marvel App
 
 The purpose of this app was to display Marvel heroes, ordered by the latest updated, using the marvel API (developer.marvel.com)
 
@@ -28,7 +28,7 @@ To start the SDK, you need to instantiate a ```SDKEnvironment``` that takes thre
 
 Currently the authentication types supported by the SDK are ```HMAC``` and ```Grant```.
 
-## Testes
+## Tests
 The project has a testing target called **MarvelAppTests**. The suite is covering unit testing, instrumented testing, and UI testing..
 
 The app has a Mock configuration to run the tests, which uses the [Mux](https://github.com/gorilla/mux) as a router, returning the mock located in the directory MarvelAppTests/Mock/.
