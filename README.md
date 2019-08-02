@@ -1,6 +1,6 @@
 # Marve App
 
-O objetivo deste aplicativo era exibir os herois da Marvel, ordenados pelos últimos atualizados, utilizando a API da marvel (developer.marvel.com)
+The purpose of this app was to display Marvel heroes, ordered by the latest updated, using the marvel API (developer.marvel.com)
 
 
 ## Project Architecture
