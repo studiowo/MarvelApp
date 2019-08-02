@@ -25,6 +25,10 @@ class MarvelListViewModelTest: QuickSpec, ViewModelAccess {
             it("should set model correctly with HeroeList object") {
                 expect(sut.getModel(self)).notTo(beNil())
             }
+            
+            it("should title return Marvel Heroes") {
+                expect(sut.title) == "Marvel Heroes"
+            }
         }
     }
 }

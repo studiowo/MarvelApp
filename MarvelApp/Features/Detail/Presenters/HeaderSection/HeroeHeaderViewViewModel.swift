@@ -15,4 +15,8 @@ final class HeroeHeaderViewViewModel: CollectionViewViewModel<HeroeHeaderSection
         
         cell.labelTitle.text = data
     }
+    
+    override func size(cell: CollectionViewCell?, data: Any, indexPath: IndexPath, view: UIView, height: CGFloat?, isHorizontal: Bool) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width - 32, height: 40)
+    }
 }
